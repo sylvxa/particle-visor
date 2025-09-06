@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "particle-visor",
+  "version": "${version}",
+  "name": "Particle Visor",
+  "description": "Removes/fades particles based on distance",
+  "authors": ["sylvxa"],
+  "contact": {
+    "website": "sylvie.lol",
+    "repo": "https://github.com/sylvxa/particle-visor",
+    "homepage": "https://modrinth.com/project/particle-visor",
+    "issues": "https://github.com/sylvxa/particle-visor/issues",
+    "discord": "https://discord.gg/5qzrB98sBA"
+  },
+  "license": "MIT",
+  "icon": "assets/particle-visor/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "lol.sylvie.visor.ParticleVisor"
+    ],
+    "ukulib": [
+      "lol.sylvie.visor.ParticleVisor"
+    ]
+  },
+  "mixins": [
+    "particle-visor.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}",
+    "ukulib": ">=1.8.0"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/5qzrB98sBA",
+        "modmenu.modrinth": "https://modrinth.com/project/particle-visor"
+      }
+    }
+  }
+}
