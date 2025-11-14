@@ -42,7 +42,7 @@ public class VisorConfig implements Serializable {
                 lerped.distanceTo(particle)
         ),
         CAMERA(3, "particle-visor.option.anchor.camera", (player, lerped, particle, camera) ->
-                camera.getCameraPos().distanceTo(particle)
+                camera.getPos().distanceTo(particle)
         );
 
         private final int id;
