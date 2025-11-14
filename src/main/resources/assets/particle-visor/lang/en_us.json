@@ -2,9 +2,12 @@
   "particle-visor.config": "Particle Visor",
   "particle-visor.config.close_distance": "Close Distance",
   "particle-visor.config.far_distance": "Far Distance",
+  "particle-visor.config.mod_enabled": "Mod Enabled",
   "particle-visor.config.anchor": "Distance Anchor",
   "particle-visor.option.anchor.eyes": "From Eyes",
   "particle-visor.option.anchor.body": "From Body",
   "particle-visor.option.anchor.feet": "From Feet",
-  "particle-visor.config.potions_only": "Only Potions"
+  "particle-visor.option.anchor.camera": "On Camera",
+  "particle-visor.config.potions_only": "Only Potions",
+  "particle-visor.config.show_in_third_person": "Third Person Particles"
 }

@@ -6,33 +6,31 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin({
-        BillboardParticle.class,
-        ConnectionParticle.class,
-        DustColorTransitionParticle.class,
-        ShriekParticle.class,
-        VibrationParticle.class
-})
+@Mixin(BillboardParticle.class)
 public abstract class ParticleMixin extends Particle {
     @Unique
     float defaultAlpha = -1;
+
+    @Shadow
+    protected float alpha;
 
     protected ParticleMixin(ClientWorld world, double x, double y, double z) {
         super(world, x, y, z);
     }
 
-    @Inject(method = "render(Lnet/minecraft/client/render/VertexConsumer;Lnet/minecraft/client/render/Camera;F)V", at = @At("HEAD"), cancellable = true)
-    public void render(VertexConsumer vertexConsumer, Camera camera, float tickProgress, CallbackInfo ci) {
+    @Inject(method = "render(Lnet/minecraft/client/particle/BillboardParticleSubmittable;Lnet/minecraft/client/render/Camera;F)V", at = @At("HEAD"), cancellable = true)
+    public void render(BillboardParticleSubmittable submittable, Camera camera, float tickProgress, CallbackInfo ci) {
         VisorConfig config = ParticleVisor.CONFIG_MANAGER.getConfig();
+        if (!config.isModEnabled()) return;
 
         if (defaultAlpha == -1) {
             defaultAlpha = this.alpha;
@@ -42,6 +40,8 @@ public abstract class ParticleMixin extends Particle {
             return;
         }
 
+        if (camera.isThirdPerson() && config.isShowInThirdPerson()) return;
+
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (player == null) return;
 
@@ -49,15 +49,15 @@ public abstract class ParticleMixin extends Particle {
         double farDistance = config.getFarDistance();
         double distanceDifference = Math.abs(farDistance - closeDistance);
 
-        double distance = config.getDistanceAnchor().getFunction().apply(player, player.getLerpedPos(tickProgress), new Vec3d(this.x, this.y, this.z));
+        double distance = config.getDistanceAnchor().getFunction().apply(player, player.getLerpedPos(tickProgress), new Vec3d(this.x, this.y, this.z), camera);
 
         if (distance < closeDistance) {
-            setAlpha(0); // For compatibility
+            this.alpha = 0; // For compatibility
             ci.cancel();
         } else if (distance > farDistance) {
-            setAlpha(defaultAlpha);
+            this.alpha = defaultAlpha;
         } else {
-            setAlpha(((float) ((distance - closeDistance) / distanceDifference)) * defaultAlpha);
+            this.alpha = ((float) ((distance - closeDistance) / distanceDifference)) * defaultAlpha;
         }
     }
 }

@@ -20,11 +20,14 @@ You can either:
 
 - `Close Distance`: The farthest distance at which particles will still be visible. Anything closer than this won't render at all.
 - `Far Distance`: The closest distance at which particles will be faded. Anything in between this value and `Close Distance` will be faded. (you can set this to be the same as `Close Distance` to make particles "pop in")
+- `Mod Enabled`: General global toggle for the mod
 - `Distance Anchor`: The point on your player model where the distance will be determined
 - - `From Eyes`: Distance determined from the "eye level"
 - - `From Body`: Distance will be the same regardless of whether the particle is at your eyes or your feet, like a cylinder (though anything above or below that will be accounted for)
 - - `From Feet`: Distance determined from the character's feet
+- - `On Camera`: Distance determined from the actual camera position (so you can look through particles in third person)
 - `Only Potions`: Anything not considered a "spell particle" will be unaffected by the mod.
+- `Third Person Particles`: If this is ON, the mod will do nothing in third person.
 
 ## Compatibility
 
