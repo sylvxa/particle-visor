@@ -3,7 +3,7 @@ package lol.sylvie.visor;
 import lol.sylvie.visor.config.VisorConfig;
 import lol.sylvie.visor.config.ConfigScreen;
 import net.fabricmc.api.ClientModInitializer;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 import net.uku3lig.ukulib.api.UkulibAPI;
 import net.uku3lig.ukulib.config.ConfigManager;
 

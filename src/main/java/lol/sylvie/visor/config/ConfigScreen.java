@@ -1,7 +1,7 @@
 package lol.sylvie.visor.config;
 
 import lol.sylvie.visor.ParticleVisor;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 import net.uku3lig.ukulib.config.option.CyclingOption;
 import net.uku3lig.ukulib.config.option.SliderOption;
 import net.uku3lig.ukulib.config.option.WidgetCreator;
