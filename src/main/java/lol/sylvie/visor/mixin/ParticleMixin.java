@@ -7,7 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.state.QuadParticleRenderState;
+import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -28,7 +28,7 @@ public abstract class ParticleMixin extends Particle {
         super(world, x, y, z);
     }
 
-    @Inject(method = "extract(Lnet/minecraft/client/renderer/state/QuadParticleRenderState;Lnet/minecraft/client/Camera;F)V", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "extract(Lnet/minecraft/client/renderer/state/level/QuadParticleRenderState;Lnet/minecraft/client/Camera;F)V", at = @At("HEAD"), cancellable = true)
     public void render(QuadParticleRenderState submittable, Camera camera, float tickProgress, CallbackInfo ci) {
         VisorConfig config = ParticleVisor.CONFIG_MANAGER.getConfig();
         if (!config.isModEnabled()) return;
